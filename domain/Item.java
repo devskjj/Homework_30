@@ -59,4 +59,12 @@ public class Item {
     //----------------------------------------------------------------------
 
 
+    @Override
+    public String toString() {
+        return "\n       Товар (" + name +
+                ", цена: " + price +
+                ", вид: " + type +
+                ", кол-во: " + amount +
+                ")";
+    }
 }

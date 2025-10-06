@@ -4,6 +4,7 @@ import util.NotImplementedException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Order {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -54,6 +55,18 @@ public class Order {
     //----------------------------------------------------------------------
 
     public void calculateTotal() {
-        throw new NotImplementedException("Вам надо реализовать этот метод!");
+        total = items.stream()
+                .mapToDouble(item -> item.getAmount() * item.getPrice())
+                .sum();
+    }
+
+    @Override
+    public String toString() {
+        return "Заказ: " + customer + items.stream()
+                .map(Item::toString)
+                .collect(Collectors.joining("")) +
+                "\n" + "       Доставить: " + homeDelivery +
+                "\n" + "       Итого: " + total +
+                "\n" + "-----------------------------------";
     }
 }

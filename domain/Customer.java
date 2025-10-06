@@ -40,4 +40,11 @@ public class Customer {
     //----------------------------------------------------------------------
 
 
+    @Override
+    public String toString() {
+        return "Пользователь (" +
+                "Имя: " + fullName +
+                ", email: " + email +
+                ')';
+    }
 }
