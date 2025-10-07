@@ -5,7 +5,9 @@ import domain.Order;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RestaurantOrders {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -41,4 +43,14 @@ public class RestaurantOrders {
     // для решения заданий из домашки :)
     // вы можете добавлять все необходимые imports
     //
+    public static void printList(List<Order> orders) {
+        orders.forEach(System.out::println);
+    }
+
+    public static List<Order> findTopCost(List<Order> orders, int n, Comparator<Order> comp) {
+        return orders.stream()
+                .sorted(comp)
+                .limit(n)
+                .collect(Collectors.toList());
+    }
 }
