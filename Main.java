@@ -50,14 +50,18 @@ public class Main {
 //            System.out.println("Имя: " + name + ", Общий сумма заказов: " + order);
 //        });
 
-        Comparator<Map.Entry<String, Double>> max = Map.Entry.comparingByValue();
-        Comparator<Map.Entry<String, Double>> min = Map.Entry.<String, Double>comparingByValue().reversed();
+//        Comparator<Map.Entry<String, Double>> max = Map.Entry.comparingByValue();
+//        Comparator<Map.Entry<String, Double>> min = Map.Entry.<String, Double>comparingByValue().reversed();
+//
+//        RestaurantOrders.getSumClient(orders, max).ifPresent(obj ->
+//                System.out.println("Клиент с макс. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
+//
+//        RestaurantOrders.getSumClient(orders, min).ifPresent(obj ->
+//                System.out.println("Клиент с мин. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
 
-        RestaurantOrders.getSumClient(orders, max).ifPresent(obj ->
-                System.out.println("Клиент с макс. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
-
-        RestaurantOrders.getSumClient(orders, min).ifPresent(obj ->
-                System.out.println("Клиент с мин. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
+        RestaurantOrders.groupItemsByAmount(orders).forEach((name, amount) -> {
+            System.out.println("Товар: " + name + ", Общее кол-во: " + amount);
+        });
 
 
     }
