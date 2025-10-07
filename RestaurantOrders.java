@@ -1,6 +1,5 @@
 
 import com.google.gson.Gson;
-import domain.Customer;
 import domain.Order;
 
 import java.io.IOException;
@@ -102,5 +101,23 @@ public class RestaurantOrders {
                 .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
                         Collectors.summingDouble(Order::getTotal)));
 
+    }
+
+    public static Optional<Map.Entry<String, Double>> getMaxSumClient(List<Order> orders) {
+        return orders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
+                        Collectors.summingDouble(Order::getTotal)))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue());
+    }
+
+    public static Optional<Map.Entry<String, Double>> getMinSumClient(List<Order> orders) {
+        return orders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
+                        Collectors.summingDouble(Order::getTotal)))
+                .entrySet()
+                .stream()
+                .min(Map.Entry.comparingByValue());
     }
 }

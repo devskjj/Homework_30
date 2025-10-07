@@ -45,9 +45,16 @@ public class Main {
 //            order.forEach(System.out::println);
 //        });
 
-        RestaurantOrders.getUniqueCustomerTotal(orders).forEach((name, order) -> {
-            System.out.println("Имя: " + name + ", Общий заказ: " + order);
-        });
+//        RestaurantOrders.getUniqueCustomerTotal(orders).forEach((name, order) -> {
+//            System.out.println("Имя: " + name + ", Общий сумма заказов: " + order);
+//        });
+
+        RestaurantOrders.getMaxSumClient(orders).ifPresent(obj ->
+                System.out.println("Клиент с макс. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
+
+        RestaurantOrders.getMinSumClient(orders).ifPresent(obj ->
+                System.out.println("Клиент с мин. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
+
     }
 
 
