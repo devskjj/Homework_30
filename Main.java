@@ -2,6 +2,7 @@ import domain.Order;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -49,11 +50,15 @@ public class Main {
 //            System.out.println("Имя: " + name + ", Общий сумма заказов: " + order);
 //        });
 
-        RestaurantOrders.getMaxSumClient(orders).ifPresent(obj ->
+        Comparator<Map.Entry<String, Double>> max = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Double>> min = Map.Entry.<String, Double>comparingByValue().reversed();
+
+        RestaurantOrders.getSumClient(orders, max).ifPresent(obj ->
                 System.out.println("Клиент с макс. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
 
-        RestaurantOrders.getMinSumClient(orders).ifPresent(obj ->
+        RestaurantOrders.getSumClient(orders, min).ifPresent(obj ->
                 System.out.println("Клиент с мин. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
+
 
     }
 

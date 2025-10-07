@@ -103,21 +103,13 @@ public class RestaurantOrders {
 
     }
 
-    public static Optional<Map.Entry<String, Double>> getMaxSumClient(List<Order> orders) {
+    public static Optional<Map.Entry<String, Double>> getSumClient(List<Order> orders, Comparator <Map.Entry<String, Double>> comparator) {
         return orders.stream()
                 .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
                         Collectors.summingDouble(Order::getTotal)))
                 .entrySet()
                 .stream()
-                .max(Map.Entry.comparingByValue());
+                .max(comparator);
     }
 
-    public static Optional<Map.Entry<String, Double>> getMinSumClient(List<Order> orders) {
-        return orders.stream()
-                .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
-                        Collectors.summingDouble(Order::getTotal)))
-                .entrySet()
-                .stream()
-                .min(Map.Entry.comparingByValue());
-    }
 }
