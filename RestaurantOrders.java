@@ -1,6 +1,5 @@
 
 import com.google.gson.Gson;
-import domain.Customer;
 import domain.Item;
 import domain.Order;
 
@@ -9,8 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.*;
 
 public class RestaurantOrders {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -95,7 +92,7 @@ public class RestaurantOrders {
                         Collectors.summingDouble(Order::getTotal)));
     }
 
-    public static Optional<Map.Entry<String, Double>> getSumClient(List<Order> orders, Comparator <Map.Entry<String, Double>> comparator) {
+    public static Optional<Map.Entry<String, Double>> getSumClient(List<Order> orders, Comparator<Map.Entry<String, Double>> comparator) {
         return orders.stream()
                 .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
                         Collectors.summingDouble(Order::getTotal)))
