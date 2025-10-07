@@ -9,17 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // это для занятия
-//        var movieCollection = MovieCollection.readFromJson();
-
-        // это для домашки
-        // выберите любое количество заказов, какое вам нравится.
-
         var orders = RestaurantOrders.read("orders_100.json").getOrders();
-        //var orders = RestaurantOrders.read("orders_1000.json").getOrders();
-        //var orders = RestaurantOrders.read("orders_10_000.json").getOrders();
 
-        // протестировать ваши методы вы можете как раз в этом файле (или в любом другом, в котором вам будет удобно)
         Comparator<Order> descending = Comparator.comparing(Order::getTotal).reversed();
         Comparator<Order> ascending = Comparator.comparing(Order::getTotal);
 
@@ -59,11 +50,11 @@ public class Main {
 //        RestaurantOrders.getSumClient(orders, min).ifPresent(obj ->
 //                System.out.println("Клиент с мин. суммой заказов: " + obj.getKey() + " = " + obj.getValue()));
 
-        RestaurantOrders.groupItemsByAmount(orders).forEach((name, amount) -> {
-            System.out.println("Товар: " + name + ", Общее кол-во: " + amount);
-        });
-
-
+//        RestaurantOrders.groupItemsByAmount(orders).forEach((name, amount) -> {
+//            System.out.println("Товар: " + name + ", Общее кол-во: " + amount);
+//        });
+        System.out.println("Бонус: Метод, который возвращает список email, кто заказывает определенный товар");
+        RestaurantOrders.bonusEmailList(orders, "pumpkin pie").forEach(System.out::println);
     }
 
 

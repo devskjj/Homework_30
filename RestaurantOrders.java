@@ -1,15 +1,13 @@
 
 import com.google.gson.Gson;
+import domain.Customer;
 import domain.Item;
 import domain.Order;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -43,11 +41,6 @@ public class RestaurantOrders {
     //------   Реализация ваших методов должна быть ниже этой линии   ------
     //----------------------------------------------------------------------
 
-    // Наполните этот класс решением домашнего задания.
-    // Вам необходимо создать все необходимые методы
-    // для решения заданий из домашки :)
-    // вы можете добавлять все необходимые imports
-    //
     public static void printList(List<Order> orders) {
         orders.forEach(System.out::println);
     }
@@ -101,7 +94,6 @@ public class RestaurantOrders {
         return orders.stream()
                 .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
                         Collectors.summingDouble(Order::getTotal)));
-
     }
 
     public static Optional<Map.Entry<String, Double>> getSumClient(List<Order> orders, Comparator <Map.Entry<String, Double>> comparator) {
@@ -119,4 +111,13 @@ public class RestaurantOrders {
                 .collect(Collectors.groupingBy(Item::getName, Collectors.summingDouble(Item::getAmount)));
     }
 
+    public static List<String> bonusEmailList(List<Order> orders, String name) {
+        return orders.stream()
+                .flatMap(order -> order.getItems().stream()
+                        .filter(item -> item.getName().equals(name))
+                        .map(item -> order.getCustomer().getEmail())
+                )
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }
