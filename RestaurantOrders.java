@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RestaurantOrders {
@@ -51,6 +52,28 @@ public class RestaurantOrders {
         return orders.stream()
                 .sorted(comp)
                 .limit(n)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Order> deliveryToHome(List<Order> orders) {
+        return orders.stream()
+                .filter(Order::isHomeDelivery)
+                .collect(Collectors.toList());
+    }
+
+    public static Optional<Order> topDeliveryOrders(List<Order> orders, Comparator<Order> comp) {
+        return orders.stream()
+                .filter((Order::isHomeDelivery))
+                .max(comp);
+    }
+
+    public static List<Order> filterOrderTotal(List<Order> orders) {
+        double maxTotal = findTopCost(orders, 1, Comparator.comparing(Order::getTotal).reversed()).get(0).getTotal();
+        double minTotal = findTopCost(orders, 1, Comparator.comparing(Order::getTotal)).get(0).getTotal();
+
+        return orders.stream()
+                .filter(order -> order.getTotal() < maxTotal && order.getTotal() > minTotal)
+                .sorted(Comparator.comparing(Order::getTotal).reversed())
                 .collect(Collectors.toList());
     }
 }

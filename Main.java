@@ -24,9 +24,17 @@ public class Main {
 
 //        RestaurantOrders.printList(orders);
 
-        RestaurantOrders.printList(RestaurantOrders.findTopCost(orders, 5, descending));
+//        RestaurantOrders.printList(RestaurantOrders.findTopCost(orders, 5, descending));
 
-        RestaurantOrders.printList(RestaurantOrders.findTopCost(orders, 3, ascending));
+//        RestaurantOrders.printList(RestaurantOrders.findTopCost(orders, 3, ascending));
+
+//        RestaurantOrders.printList(RestaurantOrders.deliveryToHome(orders));
+
+//        System.out.println(RestaurantOrders.topDeliveryOrders(orders, ascending));
+
+//        System.out.println(RestaurantOrders.topDeliveryOrders(orders, descending));
+
+        RestaurantOrders.printList(RestaurantOrders.filterOrderTotal(orders));
     }
 
 
