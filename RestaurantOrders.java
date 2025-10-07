@@ -1,5 +1,6 @@
 
 import com.google.gson.Gson;
+import domain.Customer;
 import domain.Order;
 
 import java.io.IOException;
@@ -9,6 +10,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.summingDouble;
+import static java.util.stream.Collectors.toList;
 
 public class RestaurantOrders {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -75,5 +79,16 @@ public class RestaurantOrders {
                 .filter(order -> order.getTotal() < maxTotal && order.getTotal() > minTotal)
                 .sorted(Comparator.comparing(Order::getTotal).reversed())
                 .collect(Collectors.toList());
+    }
+
+    public static double sumOrderTotal(List<Order> orders) {
+        return orders.stream().mapToDouble(Order::getTotal).sum();
+    }
+
+    public static List<String> getUniqueEmails(List<Order> orders) {
+        return orders.stream()
+                .map(order -> order.getCustomer().getEmail())
+                .distinct()
+                .collect(toList());
     }
 }

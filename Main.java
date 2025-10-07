@@ -34,7 +34,11 @@ public class Main {
 
 //        System.out.println(RestaurantOrders.topDeliveryOrders(orders, descending));
 
-        RestaurantOrders.printList(RestaurantOrders.filterOrderTotal(orders));
+//        RestaurantOrders.printList(RestaurantOrders.filterOrderTotal(orders));
+
+        System.out.println("Общая стоимость всех заказов: " + RestaurantOrders.sumOrderTotal(orders));
+
+        RestaurantOrders.getUniqueEmails(orders).forEach(System.out::println);
     }
 
 
