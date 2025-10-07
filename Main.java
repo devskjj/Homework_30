@@ -36,9 +36,18 @@ public class Main {
 
 //        RestaurantOrders.printList(RestaurantOrders.filterOrderTotal(orders));
 
-        System.out.println("Общая стоимость всех заказов: " + RestaurantOrders.sumOrderTotal(orders));
+//        System.out.println("Общая стоимость всех заказов: " + RestaurantOrders.sumOrderTotal(orders));
 
-        RestaurantOrders.getUniqueEmails(orders).forEach(System.out::println);
+//        RestaurantOrders.getUniqueEmails(orders).forEach(System.out::println);
+
+//        RestaurantOrders.getUniqueCustomerOrder(orders).forEach((name, order) -> {
+//            System.out.println("Имя клиента: " + name);
+//            order.forEach(System.out::println);
+//        });
+
+        RestaurantOrders.getUniqueCustomerTotal(orders).forEach((name, order) -> {
+            System.out.println("Имя: " + name + ", Общий заказ: " + order);
+        });
     }
 
 

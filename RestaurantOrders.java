@@ -8,11 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.summingDouble;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class RestaurantOrders {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -90,5 +90,17 @@ public class RestaurantOrders {
                 .map(order -> order.getCustomer().getEmail())
                 .distinct()
                 .collect(toList());
+    }
+
+    public static Map<String, List<Order>> getUniqueCustomerOrder(List<Order> orders) {
+        return orders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName()));
+    }
+
+    public static Map<String, Double> getUniqueCustomerTotal(List<Order> orders) {
+        return orders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getFullName(),
+                        Collectors.summingDouble(Order::getTotal)));
+
     }
 }
