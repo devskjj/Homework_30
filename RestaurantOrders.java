@@ -79,10 +79,9 @@ public class RestaurantOrders {
     }
 
     public static List<String> getUniqueEmails(List<Order> orders) {
-        return orders.stream()
+        return new ArrayList<>(orders.stream()
                 .map(order -> order.getCustomer().getEmail())
-                .distinct()
-                .collect(toList());
+                .collect(Collectors.toCollection(TreeSet::new)));
     }
 
     public static Map<String, List<Order>> getUniqueCustomerOrder(List<Order> orders) {
